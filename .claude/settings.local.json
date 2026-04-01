@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node screenshot.mjs http://localhost:3000)",
+      "Bash(node screenshot.mjs http://localhost:3000 navbar)",
+      "Bash(node screenshot.mjs http://localhost:3000 check)",
+      "Bash(node screenshot.mjs http://localhost:3000 logo)",
+      "Bash(grep -oE '#[EF][0-9A-F]{5}|rgba\\\\\\(23[0-9]|rgba\\\\\\(24[0-9]|rgba\\\\\\(25[0-9]|rgba\\\\\\(2[0-9]{2},[0-9]+,[0-9]+' \"/Users/piotrek/Documents/Aplikacje/STRONA INTERNETOWA/Skup mieszkań/index.html\")",
+      "Bash(node screenshot.mjs http://localhost:3000 gold)",
+      "Bash(node screenshot.mjs http://localhost:3000 widget)",
+      "Bash(node -e \":*)",
+      "Bash(node screenshot.mjs http://localhost:3000 faq)"
+    ]
+  }
+}

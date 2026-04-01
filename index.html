@@ -4,6 +4,46 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Skup Nieruchomości Łódź – Gotówka od ręki</title>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       GOOGLE CONSENT MODE v2 — musi być PIERWSZYM skryptem
+       Ustaw analytics_storage na 'denied' zanim załaduje się GA.
+       GA4 Measurement ID: G-3R9SGKJGBQ (konfigurowany w GTM)
+       ═══════════════════════════════════════════════════════════ -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+
+    // Odczytaj zapisaną zgodę (ważna przez 365 dni)
+    (function () {
+      var raw = localStorage.getItem('cm_consent');
+      var data = null;
+      try { data = raw ? JSON.parse(raw) : null; } catch(e){}
+      var valid      = data && data.ts && (Date.now() - data.ts < 365 * 24 * 60 * 60 * 1000);
+      var statistics = valid && data.statistics === true;
+      var marketing  = valid && data.marketing  === true;
+
+      gtag('consent', 'default', {
+        analytics_storage:  statistics ? 'granted' : 'denied',
+        ad_storage:         marketing  ? 'granted' : 'denied',
+        ad_user_data:       marketing  ? 'granted' : 'denied',
+        ad_personalization: marketing  ? 'granted' : 'denied',
+        wait_for_update:    valid ? 0 : 500
+      });
+
+      window._cmValid = valid;
+      window._cmData  = data;
+    })();
+  </script>
+
+  <!-- Google Tag Manager — ładuje się zawsze, ale szanuje consent mode -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-NR4M333B');</script>
+  <!-- End Google Tag Manager -->
+
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -194,6 +234,10 @@
   </style>
 </head>
 <body class="bg-white text-gray-800">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NR4M333B"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
 
   <!-- NAVBAR -->
   <header class="fixed top-0 left-0 right-0 z-50 border-b border-white/10 backdrop-blur-sm" style="background: rgba(38,58,62,0.97); box-shadow: 0 1px 0 rgba(0,0,0,0.15), 0 4px 16px rgba(0,0,0,0.12);">
@@ -1566,7 +1610,7 @@
 
   <!-- =====================================================
        COOKIE CONSENT BANNER
-       Podmień G-XXXXXXXXXX na swój Google Analytics ID
+       GTM: GTM-NR4M333B | GA4: G-3R9SGKJGBQ (skonfigurowany w GTM)
        ===================================================== -->
   <style>
     #cookie-banner {
@@ -1618,19 +1662,23 @@
     }
     .cookie-btn:hover  { transform: translateY(-1px); opacity: 0.9; }
     .cookie-btn:active { transform: translateY(0); }
+    /* Accept i Reject mają identyczny styl — wymóg RODO (brak dark patterns) */
     #cookie-accept {
       background: linear-gradient(135deg, #A67A44, #B8914F);
       color: #fff;
     }
     #cookie-reject {
-      background: rgba(255,255,255,0.08);
-      color: rgba(255,255,255,0.65);
+      background: rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.9);
+      border: 1px solid rgba(255,255,255,0.2);
     }
     #cookie-customize {
       background: transparent;
       color: rgba(255,255,255,0.5);
       padding: 10px 14px;
       border: 1px solid rgba(255,255,255,0.12);
+      font-weight: 400;
+      font-size: 0.75rem;
     }
     @media (max-width: 540px) {
       #cookie-banner { flex-direction: column; align-items: stretch; gap: 12px; }
@@ -1743,12 +1791,12 @@
 
   <div id="cookie-banner" role="dialog" aria-label="Zgoda na pliki cookie">
     <p>
-      Używamy plików cookie do analizy ruchu (Google Analytics). Twoje dane pomagają nam poprawiać stronę.
+      Używamy plików cookie do celów statystycznych i marketingowych. Możesz wybrać, które akceptujesz.
       <a href="privacy.html">Polityka prywatności</a>
     </p>
     <button class="cookie-btn" id="cookie-customize">Personalizuj</button>
-    <button class="cookie-btn" id="cookie-reject">Odrzuć</button>
-    <button class="cookie-btn" id="cookie-accept">Akceptuj</button>
+    <button class="cookie-btn" id="cookie-reject">Odrzuć wszystkie</button>
+    <button class="cookie-btn" id="cookie-accept">Akceptuj wszystkie</button>
   </div>
 
   <!-- Modal personalizacji -->
@@ -1757,10 +1805,11 @@
       <p class="cm-title">Ustawienia prywatności</p>
       <p class="cm-subtitle">Wybierz, które pliki cookie chcesz zaakceptować. <a href="privacy.html">Polityka prywatności</a></p>
 
+      <!-- Niezbędne — zawsze włączone -->
       <div class="cm-row">
         <div class="cm-row-text">
           <p class="cm-row-name">Niezbędne</p>
-          <p class="cm-row-desc">Wymagane do działania strony. Nie można ich wyłączyć.</p>
+          <p class="cm-row-desc">Wymagane do działania strony (sesja, formularz). Nie można ich wyłączyć.</p>
         </div>
         <label class="cm-toggle">
           <input type="checkbox" checked disabled>
@@ -1768,13 +1817,26 @@
         </label>
       </div>
 
+      <!-- Statystyki → analytics_storage -->
       <div class="cm-row">
         <div class="cm-row-text">
-          <p class="cm-row-name">Analityczne</p>
-          <p class="cm-row-desc">Google Analytics — pomagają nam rozumieć, jak użytkownicy korzystają ze strony. Dane są anonimowe.</p>
+          <p class="cm-row-name">Statystyki</p>
+          <p class="cm-row-desc">Google Analytics — mierzą ruch i zachowanie użytkowników. Dane są anonimizowane i nie identyfikują osobiście.</p>
         </div>
         <label class="cm-toggle">
-          <input type="checkbox" id="toggle-analytics" checked>
+          <input type="checkbox" id="toggle-statistics">
+          <span class="cm-toggle-track"></span>
+        </label>
+      </div>
+
+      <!-- Marketing → ad_storage + ad_user_data + ad_personalization -->
+      <div class="cm-row">
+        <div class="cm-row-text">
+          <p class="cm-row-name">Marketing</p>
+          <p class="cm-row-desc">Google Ads / remarketing — pozwalają wyświetlać dopasowane reklamy. Twoje dane mogą być przekazywane partnerom reklamowym.</p>
+        </div>
+        <label class="cm-toggle">
+          <input type="checkbox" id="toggle-marketing">
           <span class="cm-toggle-track"></span>
         </label>
       </div>
@@ -1787,70 +1849,46 @@
   </div>
 
   <script>
-    (function () {
-      var GA_ID = 'G-XXXXXXXXXX'; // ← podmień na swój Measurement ID
+    /* ═══════════════════════════════════════════════════════════════
+       CONSENT MODE v2 — logika banera cookie
+       Zgodne z RODO / ePrivacy / Google Consent Mode v2.
+       GTM ładuje się zawsze, ale NIE zbiera danych bez zgody.
 
-      function loadGA() {
-        if (window._gaLoaded) return;
-        window._gaLoaded = true;
-        var s = document.createElement('script');
-        s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
-        s.async = true;
-        document.head.appendChild(s);
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){ dataLayer.push(arguments); }
-        window.gtag = gtag;
-        gtag('js', new Date());
-        gtag('config', GA_ID);
+       Kategorie:
+         statistics → analytics_storage
+         marketing  → ad_storage + ad_user_data + ad_personalization
+       ═══════════════════════════════════════════════════════════════ */
+    (function () {
+
+      // ── Zapisz zgodę z timestampem ──────────────────────────────
+      function saveConsent(statistics, marketing) {
+        localStorage.setItem('cm_consent', JSON.stringify({
+          necessary:  true,
+          statistics: statistics,
+          marketing:  marketing,
+          ts:         Date.now(),
+          version:    '1.0'
+        }));
       }
 
-      var consent = localStorage.getItem('cookie_consent');
-      if (consent === 'accepted') { loadGA(); return; }
-      if (consent === 'rejected') { return; }
-
-      // Pokaż banner po chwili
-      setTimeout(function () {
-        var banner = document.getElementById('cookie-banner');
-        if (banner) banner.classList.add('visible');
-      }, 800);
-
-      document.getElementById('cookie-accept').addEventListener('click', function () {
-        localStorage.setItem('cookie_consent', 'accepted');
-        hideBanner();
-        loadGA();
-      });
-
-      document.getElementById('cookie-reject').addEventListener('click', function () {
-        localStorage.setItem('cookie_consent', 'rejected');
-        hideBanner();
-      });
-
-      document.getElementById('cookie-customize').addEventListener('click', function () {
-        document.getElementById('cookie-modal-overlay').classList.add('visible');
-      });
-
-      // Kliknięcie poza modalem = zamknij
-      document.getElementById('cookie-modal-overlay').addEventListener('click', function (e) {
-        if (e.target === this) closeModal();
-      });
-
-      document.getElementById('cm-save').addEventListener('click', function () {
-        var analytics = document.getElementById('toggle-analytics').checked;
-        localStorage.setItem('cookie_consent', analytics ? 'accepted' : 'rejected');
-        closeModal();
-        hideBanner();
-        if (analytics) loadGA();
-      });
-
-      document.getElementById('cm-reject-all').addEventListener('click', function () {
-        localStorage.setItem('cookie_consent', 'rejected');
-        closeModal();
-        hideBanner();
-      });
-
-      function closeModal() {
-        var overlay = document.getElementById('cookie-modal-overlay');
-        overlay.classList.remove('visible');
+      // ── Wyślij sygnały do GTM / GA ──────────────────────────────
+      function applyConsent(statistics, marketing) {
+        gtag('consent', 'update', {
+          analytics_storage:  statistics ? 'granted' : 'denied',
+          ad_storage:         marketing  ? 'granted' : 'denied',
+          ad_user_data:       marketing  ? 'granted' : 'denied',
+          ad_personalization: marketing  ? 'granted' : 'denied'
+        });
+        // Usuń ciasteczka GA/Ads gdy odrzucono
+        if (!statistics || !marketing) {
+          document.cookie.split(';').forEach(function (c) {
+            var name = c.trim().split('=')[0];
+            if (/^(_ga|_gid|_gat|_gcl|_gac)/.test(name)) {
+              document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + location.hostname;
+              document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.' + location.hostname;
+            }
+          });
+        }
       }
 
       function hideBanner() {
@@ -1860,6 +1898,71 @@
         banner.style.transform = 'translateX(-50%) translateY(120px)';
         setTimeout(function () { banner.remove(); }, 500);
       }
+
+      function closeModal() {
+        document.getElementById('cookie-modal-overlay').classList.remove('visible');
+      }
+
+      // ── Jeśli zgoda jest już ważna — przywróć stan toggleów ─────
+      if (window._cmValid) {
+        var d = window._cmData;
+        if (d) {
+          var togS = document.getElementById('toggle-statistics');
+          var togM = document.getElementById('toggle-marketing');
+          if (togS) togS.checked = !!d.statistics;
+          if (togM) togM.checked = !!d.marketing;
+        }
+        return; // nie pokazuj banera
+      }
+
+      // ── Pokaż banner po 800ms ────────────────────────────────────
+      setTimeout(function () {
+        var banner = document.getElementById('cookie-banner');
+        if (banner) banner.classList.add('visible');
+      }, 800);
+
+      // ── Akceptuj wszystkie ───────────────────────────────────────
+      document.getElementById('cookie-accept').addEventListener('click', function () {
+        saveConsent(true, true);
+        applyConsent(true, true);
+        hideBanner();
+      });
+
+      // ── Odrzuć wszystkie ────────────────────────────────────────
+      document.getElementById('cookie-reject').addEventListener('click', function () {
+        saveConsent(false, false);
+        applyConsent(false, false);
+        hideBanner();
+      });
+
+      // ── Personalizuj → otwórz modal ─────────────────────────────
+      document.getElementById('cookie-customize').addEventListener('click', function () {
+        document.getElementById('cookie-modal-overlay').classList.add('visible');
+      });
+
+      // ── Klik poza modalem = zamknij (bez zapisywania) ───────────
+      document.getElementById('cookie-modal-overlay').addEventListener('click', function (e) {
+        if (e.target === this) closeModal();
+      });
+
+      // ── Zapisz wybrane ustawienia ────────────────────────────────
+      document.getElementById('cm-save').addEventListener('click', function () {
+        var statistics = document.getElementById('toggle-statistics').checked;
+        var marketing  = document.getElementById('toggle-marketing').checked;
+        saveConsent(statistics, marketing);
+        applyConsent(statistics, marketing);
+        closeModal();
+        hideBanner();
+      });
+
+      // ── Odrzuć wszystkie (z modalu) ──────────────────────────────
+      document.getElementById('cm-reject-all').addEventListener('click', function () {
+        saveConsent(false, false);
+        applyConsent(false, false);
+        closeModal();
+        hideBanner();
+      });
+
     })();
   </script>
 

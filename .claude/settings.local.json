@@ -9,7 +9,11 @@
       "Bash(node screenshot.mjs http://localhost:3000 gold)",
       "Bash(node screenshot.mjs http://localhost:3000 widget)",
       "Bash(node -e \":*)",
-      "Bash(node screenshot.mjs http://localhost:3000 faq)"
+      "Bash(node screenshot.mjs http://localhost:3000 faq)",
+      "Bash(cp -r brand_assets/. public/brand_assets/)",
+      "Bash(cp robots.txt public/robots.txt)",
+      "Bash(cp privacy.html public/privacy.html)",
+      "Bash(cp index.html public/index.html)"
     ]
   }
 }

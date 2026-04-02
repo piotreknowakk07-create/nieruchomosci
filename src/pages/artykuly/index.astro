@@ -1,0 +1,193 @@
+---
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('blog');
+posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const featured = posts[0];
+const rest = posts.slice(1);
+---
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Artykuły i Porady – Skup Nieruchomości Łódź</title>
+  <meta name="description" content="Porady dotyczące sprzedaży mieszkań, skupu nieruchomości i rynku nieruchomości w Łodzi." />
+  <link rel="canonical" href="https://kupimynieruchomosclodz.pl/artykuly/" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&family=Erode:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script is:inline>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { brand: { dark: '#1D3033', orange: '#A67A44', 'orange-light': '#B8914F', 'orange-muted': '#F5EDE0' } },
+          fontFamily: { serif: ['Playfair Display','Georgia','serif'], sans: ['Inter','system-ui','sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; }
+    h1,h2,h3 { font-family: 'Playfair Display', Georgia, serif; }
+    .btn-primary { background: linear-gradient(135deg, #A67A44, #B8914F); transition: transform 0.2s cubic-bezier(0.22,1,0.36,1), box-shadow 0.2s; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(166,122,68,0.35); }
+    nav a { transition: color 0.2s; }
+    nav a:hover { color: #A67A44; }
+    .shadow-card { box-shadow: 0 1px 2px rgba(29,48,51,0.04), 0 4px 12px rgba(29,48,51,0.08); }
+    .card-article { transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), box-shadow 0.25s; }
+    .card-article:hover { transform: translateY(-6px); box-shadow: 0 2px 8px rgba(29,48,51,0.06), 0 16px 40px rgba(29,48,51,0.12); }
+    .card-article:hover .card-img { transform: scale(1.04); }
+    .card-img { transition: transform 0.5s cubic-bezier(0.22,1,0.36,1); }
+    html { scroll-behavior: smooth; }
+    #mobile-menu { position: fixed; top: 64px; left: 0; right: 0; z-index: 49; background: rgba(26, 43, 47, 0.82); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.07); overflow: hidden; max-height: 0; transition: max-height 0.4s ease, opacity 0.3s ease; opacity: 0; pointer-events: none; }
+    #mobile-menu.open { max-height: 440px; opacity: 1; pointer-events: auto; }
+    #mobile-menu a { display: block; color: rgba(255,255,255,0.72); font-size: 1rem; font-weight: 500; padding: 14px 24px; border-bottom: 1px solid rgba(255,255,255,0.06); transition: color 0.2s, background 0.2s; }
+    #mobile-menu a:hover { color: #B8914F; background: rgba(166,122,68,0.06); }
+    #mobile-menu .mobile-cta { margin: 16px 24px 24px; display: block; text-align: center; border-bottom: none !important; padding: 13px 24px !important; border-radius: 12px; background: linear-gradient(135deg, #A67A44, #B8914F) !important; color: white !important; font-weight: 600; }
+    .ham-line { display: block; width: 22px; height: 2px; background: white; border-radius: 2px; transition: transform 0.32s cubic-bezier(0.22,1,0.36,1), opacity 0.2s; transform-origin: center; }
+    .ham-line-1 { margin-bottom: 5px; }
+    .ham-line-2 { margin-bottom: 5px; }
+    #menu-toggle[aria-expanded="true"] .ham-line-1 { transform: translateY(7px) rotate(45deg); }
+    #menu-toggle[aria-expanded="true"] .ham-line-2 { opacity: 0; transform: scaleX(0); }
+    #menu-toggle[aria-expanded="true"] .ham-line-3 { transform: translateY(-7px) rotate(-45deg); }
+    header { padding-top: env(safe-area-inset-top); }
+    body { padding-top: env(safe-area-inset-top); }
+  </style>
+</head>
+<body class="bg-white text-gray-800">
+
+  <header class="fixed top-0 left-0 right-0 z-50 border-b border-white/10 backdrop-blur-sm" style="background: rgba(38,58,62,0.97); box-shadow: 0 1px 0 rgba(0,0,0,0.15), 0 4px 16px rgba(0,0,0,0.12);">
+    <div class="max-w-6xl mx-auto px-6 flex items-center justify-between h-16">
+      <a href="/" class="block">
+        <span style="font-family: 'Erode', serif; font-size: clamp(18px, 4.5vw, 30px); font-weight: 600; color: white; letter-spacing: 0.01em; white-space: nowrap;">SKUP NIERUCHOMOŚCI</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-white/70">
+        <a href="/#o-nas">O nas</a>
+        <a href="/#o-nas">Usługi</a>
+        <a href="/#jak-dziala">Jak to działa</a>
+        <a href="/#faq">Najczęstsze pytania</a>
+        <a href="/artykuly/">Artykuły</a>
+        <a href="/#kontakt" class="btn-primary px-5 py-2 rounded-lg text-sm font-semibold" style="color: white;">Bezpłatna wycena</a>
+      </nav>
+      <button id="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menu" class="md:hidden p-2 rounded-lg">
+        <span class="ham-line ham-line-1"></span>
+        <span class="ham-line ham-line-2"></span>
+        <span class="ham-line ham-line-3"></span>
+      </button>
+    </div>
+  </header>
+
+  <div id="mobile-menu" role="navigation" aria-label="Menu mobilne">
+    <a href="/#o-nas">O nas</a>
+    <a href="/#o-nas">Usługi</a>
+    <a href="/#jak-dziala">Jak to działa</a>
+    <a href="/#faq">Najczęstsze pytania</a>
+    <a href="/artykuly/">Artykuły</a>
+    <a href="/#kontakt" class="mobile-cta">Bezpłatna wycena →</a>
+  </div>
+
+  <script>
+    (function() {
+      var btn = document.getElementById('menu-toggle');
+      var menu = document.getElementById('mobile-menu');
+      function closeMenu() { menu.classList.remove('open'); btn.setAttribute('aria-expanded','false'); document.removeEventListener('click', outsideClick); }
+      function outsideClick(e) { if (!menu.contains(e.target) && !btn.contains(e.target)) closeMenu(); }
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var isOpen = menu.classList.toggle('open');
+        btn.setAttribute('aria-expanded', String(isOpen));
+        if (isOpen) { setTimeout(function() { document.addEventListener('click', outsideClick); }, 10); } else { document.removeEventListener('click', outsideClick); }
+      });
+      menu.querySelectorAll('a').forEach(function(link) { link.addEventListener('click', closeMenu); });
+      function positionMenu() { var h = document.querySelector('header'); if (h) menu.style.top = h.offsetHeight + 'px'; }
+      positionMenu(); window.addEventListener('resize', positionMenu);
+    })();
+  </script>
+
+  <section class="pt-32 pb-16 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <nav class="flex items-center gap-2 text-sm text-gray-400 mb-8">
+        <a href="/" class="hover:text-brand-orange transition-colors">Strona główna</a>
+        <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+        <span class="text-gray-600">Artykuły</span>
+      </nav>
+      <p class="text-brand-orange font-semibold text-sm uppercase tracking-widest mb-3">Wiedza i porady</p>
+      <h1 class="font-serif font-bold text-brand-dark mb-5" style="letter-spacing: -0.02em; font-size: clamp(1.6rem, 7vw, 3rem);">Artykuły o nieruchomościach</h1>
+      <p class="text-gray-500 text-lg max-w-2xl" style="line-height: 1.75;">Praktyczne porady dotyczące sprzedaży mieszkań, skupu nieruchomości i rynku w Łodzi. Dowiedz się jak przygotować się do sprzedaży.</p>
+    </div>
+  </section>
+
+  <section class="pb-24 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+
+      {featured && (() => {
+        const bg = featured.data.category === 'Poradnik' || featured.data.category === 'Porównanie' || featured.data.category === 'Rynek' ? '#A67A44' : '#1D3033';
+        const d = featured.data.pubDate.toLocaleDateString('pl-PL', { day: 'numeric', month: 'long', year: 'numeric' });
+        return (
+          <a href={`/artykuly/${featured.id}`} class="card-article block rounded-2xl overflow-hidden border border-gray-100 shadow-card mb-12 grid md:grid-cols-2">
+            <div class="relative overflow-hidden h-64 md:h-auto">
+              <img src={featured.data.heroImage} alt={featured.data.title} class="card-img w-full h-full object-cover" style={featured.data.heroImagePosition ? `object-position: ${featured.data.heroImagePosition};` : ''} />
+              <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(29,48,51,0.6) 0%, transparent 60%);"></div>
+              <span class="absolute top-4 left-4 text-white text-xs font-semibold px-3 py-1 rounded-full" style={`background:${bg}`}>{featured.data.category}</span>
+            </div>
+            <div class="p-8 md:p-10 flex flex-col justify-center">
+              <p class="text-brand-orange text-xs font-semibold uppercase tracking-widest mb-3">{d} · {featured.data.readTime} czytania</p>
+              <h2 class="text-3xl font-serif font-bold text-brand-dark mb-4" style="letter-spacing: -0.02em;">{featured.data.title}</h2>
+              <p class="text-gray-500 leading-relaxed mb-6" style="line-height: 1.75;">{featured.data.excerpt}</p>
+              <span class="inline-flex items-center gap-2 text-brand-orange font-semibold text-sm">
+                Czytaj więcej
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+              </span>
+            </div>
+          </a>
+        );
+      })()}
+
+      {rest.length > 0 && (
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {rest.map((p) => {
+            const bg = p.data.category === 'Poradnik' || p.data.category === 'Porównanie' || p.data.category === 'Rynek' ? '#A67A44' : '#1D3033';
+            const d = p.data.pubDate.toLocaleDateString('pl-PL', { day: 'numeric', month: 'long', year: 'numeric' });
+            return (
+              <a href={`/artykuly/${p.id}`} class="card-article block rounded-2xl overflow-hidden border border-gray-100 shadow-card">
+                <div class="relative overflow-hidden h-48">
+                  <img src={p.data.heroImage} alt={p.data.title} class="card-img w-full h-full object-cover" />
+                  <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(29,48,51,0.5) 0%, transparent 60%);"></div>
+                  <span class="absolute top-3 left-3 text-white text-xs font-semibold px-2.5 py-1 rounded-full" style={`background:${bg}`}>{p.data.category}</span>
+                </div>
+                <div class="p-6">
+                  <p class="text-gray-400 text-xs mb-2">{d} · {p.data.readTime}</p>
+                  <h3 class="font-serif font-bold text-brand-dark text-xl mb-3" style="letter-spacing:-0.01em;">{p.data.title}</h3>
+                  <p class="text-gray-500 text-sm leading-relaxed mb-4" style="line-height:1.7;">{p.data.excerpt}</p>
+                  <span class="inline-flex items-center gap-1.5 text-brand-orange font-semibold text-sm">
+                    Czytaj więcej <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                  </span>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      )}
+
+    </div>
+  </section>
+
+  <footer class="py-12 border-t border-white/10" style="background:#1D3033;">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <span style="font-family:'Erode',serif;font-size:30px;font-weight:600;color:white;letter-spacing:0.01em;">SKUP NIERUCHOMOŚCI</span>
+        <p class="text-white/40 text-sm text-center">© 2026 Skup Nieruchomości Łódź. Wszelkie prawa zastrzeżone.</p>
+        <nav class="flex gap-6 text-sm text-white/60">
+          <a href="/#o-nas" class="hover:text-brand-orange transition-colors">O nas</a>
+          <a href="/#uslugi" class="hover:text-brand-orange transition-colors">Usługi</a>
+          <a href="/#kontakt" class="hover:text-brand-orange transition-colors">Kontakt</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

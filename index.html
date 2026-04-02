@@ -38,15 +38,22 @@
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-3R9SGKJGBQ"></script>
-  <script>
-    gtag('js', new Date());
-    gtag('config', 'G-3R9SGKJGBQ');
+  <script defer>
+    window.addEventListener('load', function() {
+      gtag('js', new Date());
+      gtag('config', 'G-3R9SGKJGBQ');
+    });
   </script>
 
+  <!-- Preload LCP hero image -->
+  <link rel="preload" as="image" href="brand_assets/zdjecie1.jpg" fetchpriority="high" />
+
+  <link rel="preconnect" href="https://cdn.tailwindcss.com" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&family=Erode:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&family=Erode:wght@400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&family=Erode:wght@400;500;600;700&display=swap" /></noscript>
   <script>
     tailwind.config = {
       theme: {
@@ -329,7 +336,7 @@
 
       <div class="relative hidden lg:block animate-fadeup delay-2">
         <div class="relative rounded-2xl overflow-hidden" style="height: 600px; box-shadow: 0 8px 40px rgba(0,0,0,0.4), 0 2px 8px rgba(0,0,0,0.2);">
-          <img src="brand_assets/zdjecie1.jpg" alt="Nieruchomość w Łodzi" class="w-full h-full object-cover object-center" />
+          <img src="brand_assets/zdjecie1.jpg" alt="Nieruchomość w Łodzi" class="w-full h-full object-cover object-center" fetchpriority="high" decoding="async" />
           <div class="absolute inset-0" style="background: rgba(166,122,68,0.06); mix-blend-mode: multiply;"></div>
         </div>
       </div>
@@ -553,7 +560,7 @@
       <div class="grid md:grid-cols-3 gap-8">
         <div data-glow class="overflow-hidden">
           <div class="relative">
-            <img src="brand_assets/mieszkanie.jpg" alt="Mieszkania" class="w-full object-cover h-48" />
+            <img src="brand_assets/mieszkanie.jpg" alt="Mieszkania" class="w-full object-cover h-48" loading="lazy" decoding="async" />
             <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(29,48,51,0.7) 0%, transparent 60%);"></div>
             <div class="absolute inset-0" style="background: rgba(166,122,68,0.12); mix-blend-mode: multiply;"></div>
             <div class="absolute bottom-4 left-4">
@@ -568,7 +575,7 @@
 
         <div data-glow class="overflow-hidden">
           <div class="relative">
-            <img src="brand_assets/domek.png" alt="Domy" class="w-full object-cover h-48" />
+            <img src="brand_assets/domek.png" alt="Domy" class="w-full object-cover h-48" loading="lazy" decoding="async" />
             <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(29,48,51,0.7) 0%, transparent 60%);"></div>
             <div class="absolute inset-0" style="background: rgba(166,122,68,0.12); mix-blend-mode: multiply;"></div>
             <div class="absolute bottom-4 left-4">
@@ -583,7 +590,7 @@
 
         <div data-glow class="overflow-hidden">
           <div class="relative">
-            <img src="brand_assets/działka.jpg" alt="Działki" class="w-full object-cover h-48" />
+            <img src="brand_assets/działka.jpg" alt="Działki" class="w-full object-cover h-48" loading="lazy" decoding="async" />
             <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(29,48,51,0.7) 0%, transparent 60%);"></div>
             <div class="absolute inset-0" style="background: rgba(166,122,68,0.12); mix-blend-mode: multiply;"></div>
             <div class="absolute bottom-4 left-4">
@@ -857,7 +864,7 @@
         <div class="bought-card">
           <div class="bought-card-img-wrap">
             <span class="bought-card-badge">Skupione</span>
-            <img src="brand_assets/1.png" alt="Mieszkanie Łódź 39 m²" class="bought-card-img">
+            <img src="brand_assets/1.png" alt="Mieszkanie Łódź 39 m²" class="bought-card-img" loading="lazy" decoding="async">
           </div>
           <div class="bought-card-body">
             <div class="bought-card-tags">
@@ -872,7 +879,7 @@
         <div class="bought-card">
           <div class="bought-card-img-wrap">
             <span class="bought-card-badge">Skupione</span>
-            <img src="brand_assets/2.png" alt="Mieszkanie Łódź 44 m²" class="bought-card-img">
+            <img src="brand_assets/2.png" alt="Mieszkanie Łódź 44 m²" class="bought-card-img" loading="lazy" decoding="async">
           </div>
           <div class="bought-card-body">
             <div class="bought-card-tags">
@@ -887,7 +894,7 @@
         <div class="bought-card">
           <div class="bought-card-img-wrap">
             <span class="bought-card-badge">Skupione</span>
-            <img src="brand_assets/3.png" alt="Mieszkanie Łódź 42 m²" class="bought-card-img">
+            <img src="brand_assets/3.png" alt="Mieszkanie Łódź 42 m²" class="bought-card-img" loading="lazy" decoding="async">
           </div>
           <div class="bought-card-body">
             <div class="bought-card-tags">
@@ -902,7 +909,7 @@
         <div class="bought-card">
           <div class="bought-card-img-wrap">
             <span class="bought-card-badge">Skupione</span>
-            <img src="brand_assets/4.png" alt="Mieszkanie Łódź 46 m²" class="bought-card-img">
+            <img src="brand_assets/4.png" alt="Mieszkanie Łódź 46 m²" class="bought-card-img" loading="lazy" decoding="async">
           </div>
           <div class="bought-card-body">
             <div class="bought-card-tags">
@@ -917,7 +924,7 @@
         <div class="bought-card">
           <div class="bought-card-img-wrap">
             <span class="bought-card-badge">Skupione</span>
-            <img src="brand_assets/1.png" alt="Mieszkanie Łódź 39 m²" class="bought-card-img">
+            <img src="brand_assets/1.png" alt="Mieszkanie Łódź 39 m²" class="bought-card-img" loading="lazy" decoding="async">
           </div>
           <div class="bought-card-body">
             <div class="bought-card-tags">
@@ -930,7 +937,7 @@
         <div class="bought-card">
           <div class="bought-card-img-wrap">
             <span class="bought-card-badge">Skupione</span>
-            <img src="brand_assets/2.png" alt="Mieszkanie Łódź 44 m²" class="bought-card-img">
+            <img src="brand_assets/2.png" alt="Mieszkanie Łódź 44 m²" class="bought-card-img" loading="lazy" decoding="async">
           </div>
           <div class="bought-card-body">
             <div class="bought-card-tags">
@@ -943,7 +950,7 @@
         <div class="bought-card">
           <div class="bought-card-img-wrap">
             <span class="bought-card-badge">Skupione</span>
-            <img src="brand_assets/3.png" alt="Mieszkanie Łódź 42 m²" class="bought-card-img">
+            <img src="brand_assets/3.png" alt="Mieszkanie Łódź 42 m²" class="bought-card-img" loading="lazy" decoding="async">
           </div>
           <div class="bought-card-body">
             <div class="bought-card-tags">
@@ -956,7 +963,7 @@
         <div class="bought-card">
           <div class="bought-card-img-wrap">
             <span class="bought-card-badge">Skupione</span>
-            <img src="brand_assets/4.png" alt="Mieszkanie Łódź 46 m²" class="bought-card-img">
+            <img src="brand_assets/4.png" alt="Mieszkanie Łódź 46 m²" class="bought-card-img" loading="lazy" decoding="async">
           </div>
           <div class="bought-card-body">
             <div class="bought-card-tags">

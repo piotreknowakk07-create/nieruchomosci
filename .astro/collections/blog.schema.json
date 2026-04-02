@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "pubDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "category": {
+      "type": "string"
+    },
+    "readTime": {
+      "type": "string"
+    },
+    "heroImage": {
+      "type": "string"
+    },
+    "heroImagePosition": {
+      "type": "string"
+    },
+    "excerpt": {
+      "type": "string"
+    },
+    "$schema": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "title",
+    "description",
+    "pubDate",
+    "category",
+    "readTime",
+    "heroImage",
+    "excerpt"
+  ]
+}

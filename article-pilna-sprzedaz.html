@@ -39,6 +39,20 @@
     .prose ul li::before { content:''; position:absolute; left:0; top:0.65em; width:6px; height:6px; border-radius:50%; background:#A67A44; }
     .prose strong { color:#1D3033; font-weight:600; }
     html { scroll-behavior: smooth; }
+
+    /* Sticky sidebar */
+    @keyframes slideInSidebar {
+      from { opacity: 0; transform: translateX(20px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    #article-sidebar { animation: slideInSidebar 0.7s cubic-bezier(0.22,1,0.36,1) 0.35s both; }
+    .sidebar-input::placeholder { color: rgba(255,255,255,0.32); }
+    .sidebar-input:focus { border-color: #A67A44 !important; outline: none; }
+    #sidebar-phone:hover .sidebar-phone-num { color: #B8914F; }
+    #sidebar-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(166,122,68,0.38) !important; }
+    #sidebar-btn:active { transform: translateY(0); }
+    .shadow-sidebar { box-shadow: 0 4px 6px rgba(29,48,51,0.06), 0 20px 48px rgba(29,48,51,0.2), 0 2px 4px rgba(0,0,0,0.08); }
+
     #mobile-menu { position: fixed; top: 64px; left: 0; right: 0; z-index: 49; background: rgba(26, 43, 47, 0.82); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.07); overflow: hidden; max-height: 0; transition: max-height 0.4s ease, opacity 0.3s ease; opacity: 0; pointer-events: none; }
     #mobile-menu.open { max-height: 440px; opacity: 1; pointer-events: auto; }
     #mobile-menu a { display: block; color: rgba(255,255,255,0.72); font-size: 1rem; font-weight: 500; padding: 14px 24px; border-bottom: 1px solid rgba(255,255,255,0.06); transition: color 0.2s, background 0.2s; }

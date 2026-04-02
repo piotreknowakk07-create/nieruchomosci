@@ -13,7 +13,8 @@
       "Bash(cp -r brand_assets/. public/brand_assets/)",
       "Bash(cp robots.txt public/robots.txt)",
       "Bash(cp privacy.html public/privacy.html)",
-      "Bash(cp index.html public/index.html)"
+      "Bash(cp index.html public/index.html)",
+      "Bash(npm install:*)"
     ]
   }
 }

@@ -4,7 +4,7 @@ description: "Masz pożyczki, komornika lub hipotekę? Sprawdź, jak sprzedaż n
 pubDate: 2026-04-02
 category: "Poradnik"
 readTime: "6 min"
-heroImage: ""
+heroImage: "/brand_assets/new/Jak sprawdzić czy nieruchomość jest zadłużona.png"
 excerpt: "Spirala zadłużenia potrafi dosłownie zablokować życie. Dowiedz się, jak sprzedaż nieruchomości w Łodzi pozwala wyjść z długów nawet przy kilku pożyczkach, komorników czy obciążonej hipotece."
 ---
 

@@ -4,7 +4,7 @@ description: "Dowiedz się jak sprawdzić zadłużenie nieruchomości w Łodzi p
 pubDate: 2026-04-02
 category: "Poradnik"
 readTime: "7 min"
-heroImage: ""
+heroImage: "/brand_assets/new/Jak sprawdzić czy nieruchomość jest zadłużona.png"
 excerpt: "Chcesz sprawdzić czy mieszkanie, dom lub kamienica w Łodzi ma długi? Dowiedz się skąd wziąć dane, gdzie szukać i co zrobić gdy nieruchomość okazuje się zadłużona."
 ---
 

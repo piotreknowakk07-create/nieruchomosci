@@ -4,7 +4,7 @@ description: "Dowiedz się, czy komornik może zająć nieruchomość, której j
 pubDate: 2026-04-02
 category: "Prawo"
 readTime: "8 min"
-heroImage: ""
+heroImage: "/brand_assets/new/komornik.png"
 excerpt: "Sprawdź, jakie prawa ma komornik wobec nieruchomości ze współwłasnością i jak możesz chronić swój majątek przed egzekucją."
 ---
 

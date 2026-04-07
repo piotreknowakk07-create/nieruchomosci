@@ -14,7 +14,17 @@
       "Bash(cp robots.txt public/robots.txt)",
       "Bash(cp privacy.html public/privacy.html)",
       "Bash(cp index.html public/index.html)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(mkdir -p \"/Users/piotrek/Documents/Aplikacje/STRONA INTERNETOWA/Skup mieszkań/public/brand_assets/new\")",
+      "Bash(cp \"/Users/piotrek/Documents/Aplikacje/STRONA INTERNETOWA/Skup mieszkań/brand_assets/new/\"*.png \"/Users/piotrek/Documents/Aplikacje/STRONA INTERNETOWA/Skup mieszkań/public/brand_assets/new/\")",
+      "Bash(sed -i '' 's|heroImage: \"\"|heroImage: \"/brand_assets/new/komornik.png\"|' '/Users/piotrek/Documents/Aplikacje/STRONA INTERNETOWA/Skup mieszkań/src/content/blog/N-czy-komornik-moze-zajac-mieszkanie-wspolwlasciciela-lodz.md')",
+      "Bash(sed -i '' 's|heroImage: \"\"|heroImage: \"/brand_assets/new/wycena.png\"|' '/Users/piotrek/Documents/Aplikacje/STRONA INTERNETOWA/Skup mieszkań/src/content/blog/N-darmowa-wycena-nieruchomosci-lodz.md')",
+      "Bash(sed -i '' 's|heroImage: \"\"|heroImage: \"/brand_assets/new/Jak sprawdzić czy nieruchomość jest zadłużona.png\"|' '/Users/piotrek/Documents/Aplikacje/STRONA INTERNETOWA/Skup mieszkań/src/content/blog/N-jak-sprawdzic-czy-nieruchomosc-jest-zadluzona-lodz.md')",
+      "Bash(sed -i '' 's|heroImage: \"\"|heroImage: \"/brand_assets/new/Jak sprawdzić czy nieruchomość jest zadłużona.png\"|' '/Users/piotrek/Documents/Aplikacje/STRONA INTERNETOWA/Skup mieszkań/src/content/blog/N-jak-wyjsc-z-dlugow-sprzedajac-nieruchomosc-lodz.md')",
+      "Bash(sed -i '' 's|heroImage: \"\"|heroImage: \"/brand_assets/new/licytacjajakuniknac.png\"|' '/Users/piotrek/Documents/Aplikacje/STRONA INTERNETOWA/Skup mieszkań/src/content/blog/N-licytacja-komornicza-lodz-jak-uniknac-sprzedazy-mieszkania.md')",
+      "Bash(rm \"/Users/piotrek/Documents/Aplikacje/STRONA INTERNETOWA/Skup mieszkań/articles.html\")",
+      "Bash(rm \"/Users/piotrek/Documents/Aplikacje/STRONA INTERNETOWA/Skup mieszkań/brand_assets/układ strony.md\")",
+      "Bash(rm -rf \"/Users/piotrek/Documents/Aplikacje/STRONA INTERNETOWA/Skup mieszkań/temporary screenshots\")"
     ]
   }
 }

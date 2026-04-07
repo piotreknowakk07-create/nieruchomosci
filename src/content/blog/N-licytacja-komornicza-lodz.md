@@ -4,7 +4,7 @@ description: "Dowiedz się, jak przebiega licytacja komornicza nieruchomości w 
 pubDate: 2026-04-02
 category: "Prawo"
 readTime: "6 min"
-heroImage: ""
+heroImage: "/brand_assets/new/licytacja.png"
 excerpt: "Licytacja komornicza nieruchomości to ostateczność, której można uniknąć. Sprawdź, jak działa ten proces w Łodzi, jakie masz prawa i co zrobić, zanim będzie za późno."
 ---
 

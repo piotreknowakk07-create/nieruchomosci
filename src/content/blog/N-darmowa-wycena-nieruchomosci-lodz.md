@@ -4,7 +4,7 @@ description: "Dowiedz się, jak uzyskać bezpłatną wycenę mieszkania, domu lu
 pubDate: 2026-04-02
 category: "Wycena"
 readTime: "6 min"
-heroImage: ""
+heroImage: "/brand_assets/new/wycena.png"
 excerpt: "Jak wycenić nieruchomość w Łodzi bez płacenia za rzeczoznawcę? Poznaj metody darmowej wyceny i dowiedz się, kiedy warto umówić się na indywidualną konsultację."
 ---
 

@@ -4,7 +4,7 @@ description: "Dowiedz się, czym jest licytacja komornicza nieruchomości w Łod
 pubDate: 2026-04-02
 category: "Prawo"
 readTime: "7 min"
-heroImage: ""
+heroImage: "/brand_assets/new/licytacjajakuniknac.png"
 excerpt: "Licytacja komornicza to ostateczność, której wielu właścicieli mieszkań w Łodzi chce uniknąć. Sprawdź, jakie masz opcje, kiedy komornik może odstąpić od licytacji i czy skup nieruchomości to realne wyjście z trudnej sytuacji."
 ---
 

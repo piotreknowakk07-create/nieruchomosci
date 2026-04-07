@@ -80,3 +80,17 @@ nav a:hover { color: #A67A44; }
 #menu-toggle[aria-expanded="true"] .ham-line-1 { transform: translateY(7px) rotate(45deg); }
 #menu-toggle[aria-expanded="true"] .ham-line-2 { opacity: 0; transform: scaleX(0); }
 #menu-toggle[aria-expanded="true"] .ham-line-3 { transform: translateY(-7px) rotate(-45deg); }
+
+/* Sticky article sidebar */
+@keyframes slideInSidebar {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+#article-sidebar { animation: slideInSidebar 0.7s cubic-bezier(0.22,1,0.36,1) 0.35s both; }
+.sidebar-input::placeholder { color: rgba(255,255,255,0.32); }
+.sidebar-input:focus { border-color: #A67A44 !important; outline: none; }
+.shadow-sidebar { box-shadow: 0 4px 6px rgba(29,48,51,0.06), 0 20px 48px rgba(29,48,51,0.2), 0 2px 4px rgba(0,0,0,0.08); }
+#sidebar-phone:hover .sidebar-phone-num { color: #B8914F; }
+#sidebar-btn { transition: transform 0.2s cubic-bezier(0.22,1,0.36,1), box-shadow 0.2s; }
+#sidebar-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(166,122,68,0.38) !important; }
+#sidebar-btn:active { transform: translateY(0); }

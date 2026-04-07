@@ -4,7 +4,7 @@ description: "Dowiedz się, jak szybko sprzedać mieszkanie, dom lub działkę w
 pubDate: 2026-04-02
 category: "Poradnik"
 readTime: "7 min"
-heroImage: ""
+heroImage: "/brand_assets/new/sprzedaz nieruchomosci.png"
 excerpt: "Sprzedajesz nieruchomość w Łodzi i zależy Ci na czasie? Poznaj sprawdzone metody szybkiej sprzedaży, porównaj skup nieruchomości z tradycyjnym ogłoszeniem i dowiedz się, ile naprawdę trwa cały proces."
 ---
 

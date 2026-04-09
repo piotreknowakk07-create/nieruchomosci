@@ -3,8 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="brand_assets/logos.png" />
   <title>Skup Nieruchomości Łódź – Gotówka od ręki</title>
-  <meta name="description" content="Skupujemy mieszkania, domy i nieruchomości w Łodzi za gotówkę. Wycena w 24h, transakcja nawet w 7 dni, zero ukrytych kosztów. Zadzwoń i uzyskaj bezpłatną wycenę." />
+  <meta name="description" content="Sprzedaj mieszkanie w Łodzi szybko i bez stresu! Kupujemy mieszkania od właścicieli, oferujemy gotówkę i proste formalności. Skontaktuj się i poznaj naszą uczciwą ofertę." />
+  <meta name="keywords" content="skup mieszkań Łódź, sprzedaż mieszkania Łódź, szybka sprzedaż mieszkania Łódź, kupno mieszkań Łódź, mieszkanie za gotówkę Łódź, sprzedaż mieszkania bez pośredników, wycena mieszkania Łódź, mieszkania Łódź skup" />
+  <meta name="robots" content="index, follow" />
 
   <!-- ═══════════════════════════════════════════════════════════
        GOOGLE CONSENT MODE v2 — musi być PIERWSZYM skryptem
@@ -15,7 +18,7 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){ dataLayer.push(arguments); }
 
-    // Odczytaj zapisaną zgodę (ważna przez 365 dni)
+    // ── Odczytaj zapisaną zgodę (ważna przez 365 dni) ───────────────
     (function () {
       var raw = localStorage.getItem('cm_consent');
       var data = null;
@@ -24,26 +27,40 @@
       var statistics = valid && data.statistics === true;
       var marketing  = valid && data.marketing  === true;
 
+      // Domyślnie blokuj wszystko — nawet jeśli był zapis, ustaw consent przed załadowaniem GA
       gtag('consent', 'default', {
         analytics_storage:  statistics ? 'granted' : 'denied',
         ad_storage:         marketing  ? 'granted' : 'denied',
         ad_user_data:       marketing  ? 'granted' : 'denied',
         ad_personalization: marketing  ? 'granted' : 'denied',
-        wait_for_update:    valid ? 0 : 500
+        wait_for_update:    500
       });
 
       window._cmValid = valid;
       window._cmData  = data;
+      window._cmStats = statistics;
+      window._cmMktg  = marketing;
     })();
-  </script>
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3R9SGKJGBQ"></script>
-  <script defer>
-    window.addEventListener('load', function() {
-      gtag('js', new Date());
-      gtag('config', 'G-3R9SGKJGBQ');
-    });
+    // ── Dynamiczne ładowanie GA4 — wywoływane tylko po udzieleniu zgody ──
+    window._gaLoaded = false;
+    window.loadGA = function() {
+      if (window._gaLoaded) return;
+      window._gaLoaded = true;
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-3R9SGKJGBQ';
+      s.onload = function() {
+        gtag('js', new Date());
+        gtag('config', 'G-3R9SGKJGBQ');
+      };
+      document.head.appendChild(s);
+    };
+
+    // Jeśli zgoda była już udzielona — załaduj GA od razu
+    if (window._cmValid && window._cmStats) {
+      window.loadGA();
+    }
   </script>
 
   <!-- Preload LCP hero image -->
@@ -1865,7 +1882,7 @@
         }));
       }
 
-      // ── Wyślij sygnały do GTM / GA ──────────────────────────────
+      // ── Wyślij sygnały do GA i załaduj skrypt jeśli potrzeba ────
       function applyConsent(statistics, marketing) {
         gtag('consent', 'update', {
           analytics_storage:  statistics ? 'granted' : 'denied',
@@ -1873,6 +1890,10 @@
           ad_user_data:       marketing  ? 'granted' : 'denied',
           ad_personalization: marketing  ? 'granted' : 'denied'
         });
+        // Załaduj GA4 dynamicznie gdy analytics zostało odblokowane
+        if (statistics && typeof window.loadGA === 'function') {
+          window.loadGA();
+        }
         // Usuń ciasteczka GA/Ads gdy odrzucono
         if (!statistics || !marketing) {
           document.cookie.split(';').forEach(function (c) {

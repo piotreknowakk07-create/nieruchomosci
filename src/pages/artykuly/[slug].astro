@@ -27,6 +27,7 @@ const categoryBg = category === 'Poradnik' || category === 'Porównanie' || cate
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{title} – Skup Nieruchomości Łódź</title>
   <meta name="description" content={description} />
+  <meta name="robots" content="index, follow" />
   <link rel="canonical" href={`https://kupimynieruchomosclodz.pl/artykuly/${post.id}`} />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
@@ -34,6 +35,55 @@ const categoryBg = category === 'Poradnik' || category === 'Porównanie' || cate
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&family=Erode:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- ═══════════════════════════════════════════════════════════
+       GOOGLE CONSENT MODE v2 — musi być PIERWSZYM skryptem
+       Ustaw analytics_storage na 'denied' zanim załaduje się GA.
+       ═══════════════════════════════════════════════════════════ -->
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+
+    (function () {
+      var raw = localStorage.getItem('cm_consent');
+      var data = null;
+      try { data = raw ? JSON.parse(raw) : null; } catch(e){}
+      var valid      = data && data.ts && (Date.now() - data.ts < 365 * 24 * 60 * 60 * 1000);
+      var statistics = valid && data.statistics === true;
+      var marketing  = valid && data.marketing  === true;
+
+      gtag('consent', 'default', {
+        analytics_storage:  statistics ? 'granted' : 'denied',
+        ad_storage:         marketing  ? 'granted' : 'denied',
+        ad_user_data:       marketing  ? 'granted' : 'denied',
+        ad_personalization: marketing  ? 'granted' : 'denied',
+        wait_for_update:    500
+      });
+
+      window._cmValid = valid;
+      window._cmData  = data;
+      window._cmStats = statistics;
+      window._cmMktg  = marketing;
+    })();
+
+    window._gaLoaded = false;
+    window.loadGA = function() {
+      if (window._gaLoaded) return;
+      window._gaLoaded = true;
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-3R9SGKJGBQ';
+      s.onload = function() {
+        gtag('js', new Date());
+        gtag('config', 'G-3R9SGKJGBQ');
+      };
+      document.head.appendChild(s);
+    };
+
+    if (window._cmValid && window._cmStats) {
+      window.loadGA();
+    }
+  </script>
 </head>
 <body class="bg-white text-gray-800">
 
@@ -306,5 +356,193 @@ const categoryBg = category === 'Poradnik' || category === 'Porównanie' || cate
       </div>
     </div>
   </footer>
+
+  <!-- =====================================================
+       COOKIE CONSENT BANNER
+       GA4: G-3R9SGKJGBQ
+       ===================================================== -->
+  <style>
+    #cookie-banner {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(120px);
+      z-index: 99999;
+      width: calc(100% - 32px);
+      max-width: 680px;
+      background: #1D3033;
+      border-radius: 20px;
+      padding: 20px 24px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.35), 0 2px 8px rgba(0,0,0,0.15);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      opacity: 0;
+      transition: transform 0.5s cubic-bezier(0.22,1,0.36,1), opacity 0.4s ease;
+      pointer-events: none;
+    }
+    #cookie-banner.visible {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    #cookie-banner p { color: rgba(255,255,255,0.75); font-size: 0.8125rem; line-height: 1.6; margin: 0; flex: 1; }
+    #cookie-banner a { color: #B8914F; text-decoration: underline; }
+    #cookie-banner a:hover { color: #A67A44; }
+    .cookie-btn {
+      border: none; border-radius: 12px; font-size: 0.8125rem; font-weight: 600;
+      cursor: pointer; padding: 10px 20px; white-space: nowrap;
+      transition: transform 0.2s cubic-bezier(0.22,1,0.36,1), opacity 0.2s;
+      flex-shrink: 0;
+    }
+    .cookie-btn:hover  { transform: translateY(-1px); opacity: 0.9; }
+    .cookie-btn:active { transform: translateY(0); }
+    #cookie-accept { background: linear-gradient(135deg, #A67A44, #B8914F); color: #fff; }
+    #cookie-reject { background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.9); border: 1px solid rgba(255,255,255,0.2); }
+    #cookie-customize { background: transparent; color: rgba(255,255,255,0.5); padding: 10px 14px; border: 1px solid rgba(255,255,255,0.12); font-weight: 400; font-size: 0.75rem; }
+    @media (max-width: 540px) {
+      #cookie-banner { flex-direction: column; align-items: stretch; gap: 12px; }
+      .cookie-btn { text-align: center; }
+    }
+    #cookie-modal-overlay {
+      position: fixed; inset: 0; z-index: 999999;
+      background: rgba(0,0,0,0.55); backdrop-filter: blur(4px);
+      display: flex; align-items: flex-end; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+    }
+    #cookie-modal-overlay.visible { opacity: 1; pointer-events: auto; }
+    #cookie-modal {
+      background: #fff; width: 100%; max-width: 520px;
+      border-radius: 24px 24px 0 0; padding: 32px 28px 36px;
+      transform: translateY(40px); transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+      max-height: 90vh; overflow-y: auto;
+    }
+    #cookie-modal-overlay.visible #cookie-modal { transform: translateY(0); }
+    @media (min-width: 560px) {
+      #cookie-modal-overlay { align-items: center; }
+      #cookie-modal { border-radius: 24px; }
+    }
+    .cm-title { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: #1D3033; margin: 0 0 6px; }
+    .cm-subtitle { font-size: 0.8125rem; color: #6b7280; line-height: 1.6; margin: 0 0 24px; }
+    .cm-subtitle a { color: #A67A44; text-decoration: underline; }
+    .cm-row { display: flex; align-items: flex-start; gap: 16px; padding: 16px 0; border-bottom: 1px solid #f3f4f6; }
+    .cm-row:last-of-type { border-bottom: none; }
+    .cm-row-text { flex: 1; }
+    .cm-row-name { font-size: 0.875rem; font-weight: 600; color: #1D3033; margin: 0 0 3px; }
+    .cm-row-desc { font-size: 0.78rem; color: #9ca3af; line-height: 1.55; margin: 0; }
+    .cm-toggle { position: relative; flex-shrink: 0; margin-top: 2px; }
+    .cm-toggle input { opacity: 0; width: 0; height: 0; position: absolute; }
+    .cm-toggle-track { display: block; width: 44px; height: 24px; border-radius: 100px; background: #e5e7eb; cursor: pointer; transition: background 0.25s; position: relative; }
+    .cm-toggle input:checked + .cm-toggle-track { background: linear-gradient(135deg, #A67A44, #B8914F); }
+    .cm-toggle input:disabled + .cm-toggle-track { cursor: not-allowed; opacity: 0.6; }
+    .cm-toggle-track::after { content: ''; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%; background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.18); transition: transform 0.25s cubic-bezier(0.22,1,0.36,1); }
+    .cm-toggle input:checked + .cm-toggle-track::after { transform: translateX(20px); }
+    .cm-actions { display: flex; gap: 10px; margin-top: 24px; }
+    .cm-btn { flex: 1; border: none; border-radius: 12px; font-size: 0.875rem; font-weight: 600; padding: 12px 16px; cursor: pointer; transition: transform 0.2s cubic-bezier(0.22,1,0.36,1), opacity 0.2s; }
+    .cm-btn:hover  { transform: translateY(-1px); opacity: 0.9; }
+    .cm-btn:active { transform: translateY(0); }
+    #cm-save { background: linear-gradient(135deg, #A67A44, #B8914F); color: #fff; }
+    #cm-reject-all { background: #f3f4f6; color: #6b7280; }
+  </style>
+
+  <div id="cookie-banner" role="dialog" aria-label="Zgoda na pliki cookie">
+    <p>Używamy plików cookie do celów statystycznych i marketingowych. Możesz wybrać, które akceptujesz. <a href="/privacy.html">Polityka prywatności</a></p>
+    <button class="cookie-btn" id="cookie-customize">Personalizuj</button>
+    <button class="cookie-btn" id="cookie-reject">Odrzuć wszystkie</button>
+    <button class="cookie-btn" id="cookie-accept">Akceptuj wszystkie</button>
+  </div>
+
+  <div id="cookie-modal-overlay" role="dialog" aria-modal="true" aria-label="Ustawienia cookies">
+    <div id="cookie-modal">
+      <p class="cm-title">Ustawienia prywatności</p>
+      <p class="cm-subtitle">Wybierz, które pliki cookie chcesz zaakceptować. <a href="/privacy.html">Polityka prywatności</a></p>
+      <div class="cm-row">
+        <div class="cm-row-text">
+          <p class="cm-row-name">Niezbędne</p>
+          <p class="cm-row-desc">Wymagane do działania strony (sesja, formularz). Nie można ich wyłączyć.</p>
+        </div>
+        <label class="cm-toggle"><input type="checkbox" checked disabled><span class="cm-toggle-track"></span></label>
+      </div>
+      <div class="cm-row">
+        <div class="cm-row-text">
+          <p class="cm-row-name">Statystyki</p>
+          <p class="cm-row-desc">Google Analytics — mierzą ruch i zachowanie użytkowników. Dane są anonimizowane i nie identyfikują osobiście.</p>
+        </div>
+        <label class="cm-toggle"><input type="checkbox" id="toggle-statistics"><span class="cm-toggle-track"></span></label>
+      </div>
+      <div class="cm-row">
+        <div class="cm-row-text">
+          <p class="cm-row-name">Marketing</p>
+          <p class="cm-row-desc">Google Ads / remarketing — pozwalają wyświetlać dopasowane reklamy. Twoje dane mogą być przekazywane partnerom reklamowym.</p>
+        </div>
+        <label class="cm-toggle"><input type="checkbox" id="toggle-marketing"><span class="cm-toggle-track"></span></label>
+      </div>
+      <div class="cm-actions">
+        <button class="cm-btn" id="cm-reject-all">Odrzuć wszystkie</button>
+        <button class="cm-btn" id="cm-save">Zapisz ustawienia</button>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    (function () {
+      function saveConsent(statistics, marketing) {
+        localStorage.setItem('cm_consent', JSON.stringify({ necessary: true, statistics: statistics, marketing: marketing, ts: Date.now(), version: '1.0' }));
+      }
+      function applyConsent(statistics, marketing) {
+        gtag('consent', 'update', {
+          analytics_storage:  statistics ? 'granted' : 'denied',
+          ad_storage:         marketing  ? 'granted' : 'denied',
+          ad_user_data:       marketing  ? 'granted' : 'denied',
+          ad_personalization: marketing  ? 'granted' : 'denied'
+        });
+        if (statistics && typeof window.loadGA === 'function') { window.loadGA(); }
+        if (!statistics || !marketing) {
+          document.cookie.split(';').forEach(function (c) {
+            var name = c.trim().split('=')[0];
+            if (/^(_ga|_gid|_gat|_gcl|_gac)/.test(name)) {
+              document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + location.hostname;
+              document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.' + location.hostname;
+            }
+          });
+        }
+      }
+      function hideBanner() {
+        var b = document.getElementById('cookie-banner');
+        if (!b) return;
+        b.style.opacity = '0';
+        b.style.transform = 'translateX(-50%) translateY(120px)';
+        setTimeout(function () { b.remove(); }, 500);
+      }
+      function closeModal() { document.getElementById('cookie-modal-overlay').classList.remove('visible'); }
+
+      if (window._cmValid) {
+        var d = window._cmData;
+        if (d) {
+          var togS = document.getElementById('toggle-statistics');
+          var togM = document.getElementById('toggle-marketing');
+          if (togS) togS.checked = !!d.statistics;
+          if (togM) togM.checked = !!d.marketing;
+        }
+        return;
+      }
+
+      setTimeout(function () {
+        var banner = document.getElementById('cookie-banner');
+        if (banner) banner.classList.add('visible');
+      }, 800);
+
+      document.getElementById('cookie-accept').addEventListener('click', function () { saveConsent(true, true); applyConsent(true, true); hideBanner(); });
+      document.getElementById('cookie-reject').addEventListener('click', function () { saveConsent(false, false); applyConsent(false, false); hideBanner(); });
+      document.getElementById('cookie-customize').addEventListener('click', function () { document.getElementById('cookie-modal-overlay').classList.add('visible'); });
+      document.getElementById('cookie-modal-overlay').addEventListener('click', function (e) { if (e.target === this) closeModal(); });
+      document.getElementById('cm-save').addEventListener('click', function () {
+        var s = document.getElementById('toggle-statistics').checked;
+        var m = document.getElementById('toggle-marketing').checked;
+        saveConsent(s, m); applyConsent(s, m); closeModal(); hideBanner();
+      });
+      document.getElementById('cm-reject-all').addEventListener('click', function () { saveConsent(false, false); applyConsent(false, false); closeModal(); hideBanner(); });
+    })();
+  </script>
 </body>
 </html>

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://kupimynieruchomosclodz.pl/sitemap.xml
+Sitemap: https://kupimynieruchomosclodz.pl/sitemap-index.xml

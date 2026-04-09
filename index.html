@@ -1563,22 +1563,18 @@
       function open()  { text.classList.add('open'); }
       function close() { text.classList.remove('open'); }
 
-      // Detekcja ciemnego tła pod widgetem
-      function checkTheme() {
-        // Używamy stałej pozycji fixed (bottom-right) niezależnie od animacji
-        const vw = window.innerWidth;
-        const vh = window.innerHeight;
-        const cx = vw - 28 - 31; // right: 28px + half of ~62px icon
-        const cy = vh - 28 - 31; // bottom: 28px + half of ~62px icon
-        widget.style.visibility = 'hidden';
-        const el = document.elementFromPoint(cx, cy);
-        widget.style.visibility = '';
-        const isDark = !!(el && el.closest('[data-theme="dark"]'));
-        pill.classList.toggle('off-dark', !isDark);
+      // Detekcja: biały gdy hero widoczny, ciemny gdy poza hero
+      const hero = document.querySelector('[data-theme="dark"]');
+      function setTheme(heroVisible) {
+        pill.classList.toggle('off-dark', !heroVisible);
       }
-      // Wywołaj po zakończeniu animacji wejścia (delay 1s + duration 0.6s)
-      setTimeout(checkTheme, 1700);
-      window.addEventListener('scroll', checkTheme, { passive: true });
+      if (hero) {
+        const observer = new IntersectionObserver(
+          (entries) => setTheme(entries[0].isIntersecting),
+          { threshold: 0 }
+        );
+        observer.observe(hero);
+      }
 
       // Cykl 1: otwiera się po 5s, zamyka po 60s
       // Cykl 2: otwiera się 20s po zamknięciu, zamyka po 60s

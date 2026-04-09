@@ -256,7 +256,7 @@ const categoryBg = category === 'Poradnik' || category === 'Porównanie' || cate
 
   <script is:inline>
     (function() {
-      var FORMSPREE = 'https://formspree.io/f/xvzvrkrp';
+      var FORMSPREE = 'https://api.web3forms.com/submit';
       var form = document.getElementById('sidebar-form');
       if (!form) return;
       form.addEventListener('submit', async function(e) {
@@ -276,7 +276,7 @@ const categoryBg = category === 'Poradnik' || category === 'Porównanie' || cate
           var res = await fetch(FORMSPREE, {
             method: 'POST',
             headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-            body: JSON.stringify({ imie: nameVal, telefon: phoneVal, wiadomosc: msgVal })
+            body: JSON.stringify({ access_key: 'a60902c4-7446-490d-bf43-2ffaa5a5a82c', imie: nameVal, telefon: phoneVal, wiadomosc: msgVal })
           });
           if (res.ok) {
             form.reset();

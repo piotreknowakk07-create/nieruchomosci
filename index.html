@@ -1317,7 +1317,7 @@
     // ============================================================
     //  WKLEJ TUTAJ URL z Google Apps Script (Wdróż → Aplikacja web)
     // ============================================================
-    var FORMSPREE_URL = 'https://formspree.io/f/xvzvrkrp';
+    var FORMSPREE_URL = 'https://api.web3forms.com/submit';
     // ============================================================
 
     document.addEventListener('DOMContentLoaded', function () {
@@ -1395,6 +1395,7 @@
             method: 'POST',
             headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
             body: JSON.stringify({
+              access_key: 'a60902c4-7446-490d-bf43-2ffaa5a5a82c',
               imie:    nameVal,
               telefon: phoneVal
             })

@@ -155,7 +155,7 @@ const categoryBg = category === 'Poradnik' || category === 'Porównanie' || cate
   </script>
 
   <div class="relative w-full h-[60vh] min-h-[400px] overflow-hidden">
-    <img src={heroImage} alt={title} class="w-full h-full object-cover" style={heroImagePosition ? `object-position: ${heroImagePosition};` : ''} />
+    <img src={heroImage} alt={title} title={title} class="w-full h-full object-cover" style={heroImagePosition ? `object-position: ${heroImagePosition};` : ''} />
     <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(29,48,51,0.75) 0%,rgba(29,48,51,0.2) 60%,transparent 100%);"></div>
     <div class="absolute bottom-0 left-0 right-0 pb-10 pt-20" style="background:linear-gradient(to top,rgba(29,48,51,0.8),transparent);">
       <div class="max-w-3xl mx-auto px-6">
@@ -287,7 +287,7 @@ const categoryBg = category === 'Poradnik' || category === 'Porównanie' || cate
             return (
               <a href={`/artykuly/${p.id}`} class="card-article block rounded-2xl overflow-hidden border border-gray-100 shadow-card">
                 <div class="relative overflow-hidden h-48">
-                  <img src={p.data.heroImage} alt={p.data.title} class="card-img w-full h-full object-cover" />
+                  <img src={p.data.heroImage} alt={p.data.title} title={p.data.title} class="card-img w-full h-full object-cover" />
                   <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(29,48,51,0.5) 0%,transparent 60%);"></div>
                   <span class="absolute top-3 left-3 text-white text-xs font-semibold px-2.5 py-1 rounded-full" style={`background:${bg}`}>{p.data.category}</span>
                 </div>

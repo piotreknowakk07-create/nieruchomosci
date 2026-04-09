@@ -133,9 +133,9 @@ function fmtDate(d: Date) {
         <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
         <span class="text-gray-600">Artykuły</span>
       </nav>
-      <p class="text-brand-orange font-semibold text-sm uppercase tracking-widest mb-3">Wiedza i porady</p>
-      <h1 class="font-serif font-bold text-brand-dark mb-5" style="letter-spacing: -0.02em; font-size: clamp(1.6rem, 7vw, 3rem);">Artykuły o nieruchomościach</h1>
-      <p class="text-gray-500 text-lg max-w-2xl" style="line-height: 1.75;">Praktyczne porady dotyczące sprzedaży mieszkań, skupu nieruchomości i rynku w Łodzi. Dowiedz się jak przygotować się do sprzedaży.</p>
+      <p class="text-brand-orange font-semibold text-sm uppercase tracking-widest mb-3 text-center">Wiedza&nbsp;i porady</p>
+      <h1 class="font-serif font-bold text-brand-dark mb-5 text-center" style="letter-spacing: -0.02em; font-size: clamp(1.6rem, 7vw, 3rem);">Artykuły o nieruchomościach</h1>
+      <p class="text-gray-500 text-lg max-w-2xl mx-auto text-center" style="line-height: 1.75;">Praktyczne porady dotyczące sprzedaży mieszkań, skupu nieruchomości&nbsp;i rynku w Łodzi. Dowiedz się jak przygotować się do sprzedaży.</p>
     </div>
   </section>
 
@@ -145,7 +145,7 @@ function fmtDate(d: Date) {
       {featured && (
         <a href={`/artykuly/${featured.id}`} class="card-article block rounded-2xl overflow-hidden border border-gray-100 shadow-card mb-12 grid md:grid-cols-2">
           <div class="relative overflow-hidden h-64 md:h-auto">
-            <img src={featured.data.heroImage} alt={featured.data.title} class="card-img w-full h-full object-cover" style={featured.data.heroImagePosition ? `object-position: ${featured.data.heroImagePosition};` : ''} />
+            <img src={featured.data.heroImage} alt={featured.data.title} title={featured.data.title} class="card-img w-full h-full object-cover" style={featured.data.heroImagePosition ? `object-position: ${featured.data.heroImagePosition};` : ''} />
             <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(29,48,51,0.6) 0%, transparent 60%);"></div>
             <span class="absolute top-4 left-4 text-white text-xs font-semibold px-3 py-1 rounded-full" style={`background:${catBg(featured.data.category)}`}>{featured.data.category}</span>
           </div>
@@ -166,7 +166,7 @@ function fmtDate(d: Date) {
           {rest.map((p) => (
             <a href={`/artykuly/${p.id}`} class="card-article block rounded-2xl overflow-hidden border border-gray-100 shadow-card">
               <div class="relative overflow-hidden h-48">
-                <img src={p.data.heroImage} alt={p.data.title} class="card-img w-full h-full object-cover" />
+                <img src={p.data.heroImage} alt={p.data.title} title={p.data.title} class="card-img w-full h-full object-cover" />
                 <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(29,48,51,0.5) 0%, transparent 60%);"></div>
                 <span class="absolute top-3 left-3 text-white text-xs font-semibold px-2.5 py-1 rounded-full" style={`background:${catBg(p.data.category)}`}>{p.data.category}</span>
               </div>

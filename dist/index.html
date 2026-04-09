@@ -17,7 +17,7 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){ dataLayer.push(arguments); }
 
-    // Odczytaj zapisaną zgodę (ważna przez 365 dni)
+    // ── Odczytaj zapisaną zgodę (ważna przez 365 dni) ───────────────
     (function () {
       var raw = localStorage.getItem('cm_consent');
       var data = null;
@@ -26,27 +26,43 @@
       var statistics = valid && data.statistics === true;
       var marketing  = valid && data.marketing  === true;
 
+      // Domyślnie blokuj wszystko — nawet jeśli był zapis, ustaw consent przed załadowaniem GA
       gtag('consent', 'default', {
         analytics_storage:  statistics ? 'granted' : 'denied',
         ad_storage:         marketing  ? 'granted' : 'denied',
         ad_user_data:       marketing  ? 'granted' : 'denied',
         ad_personalization: marketing  ? 'granted' : 'denied',
-        wait_for_update:    valid ? 0 : 500
+        wait_for_update:    500
       });
 
       window._cmValid = valid;
       window._cmData  = data;
+      window._cmStats = statistics;
+      window._cmMktg  = marketing;
     })();
+
+    // ── Dynamiczne ładowanie GA4 — wywoływane tylko po udzieleniu zgody ──
+    window._gaLoaded = false;
+    window.loadGA = function() {
+      if (window._gaLoaded) return;
+      window._gaLoaded = true;
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-3R9SGKJGBQ';
+      s.onload = function() {
+        gtag('js', new Date());
+        gtag('config', 'G-3R9SGKJGBQ');
+      };
+      document.head.appendChild(s);
+    };
+
+    // Jeśli zgoda była już udzielona — załaduj GA od razu
+    if (window._cmValid && window._cmStats) {
+      window.loadGA();
+    }
   </script>
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3R9SGKJGBQ"></script>
-  <script defer>
-    window.addEventListener('load', function() {
-      gtag('js', new Date());
-      gtag('config', 'G-3R9SGKJGBQ');
-    });
-  </script>
+  <link rel="icon" type="image/png" href="brand_assets/logos.png" />
 
   <!-- Preload LCP hero image -->
   <link rel="preload" as="image" href="brand_assets/zdjecie1.jpg" fetchpriority="high" />
@@ -1857,7 +1873,7 @@
         }));
       }
 
-      // ── Wyślij sygnały do GTM / GA ──────────────────────────────
+      // ── Wyślij sygnały do GA i załaduj skrypt jeśli potrzeba ────
       function applyConsent(statistics, marketing) {
         gtag('consent', 'update', {
           analytics_storage:  statistics ? 'granted' : 'denied',
@@ -1865,6 +1881,10 @@
           ad_user_data:       marketing  ? 'granted' : 'denied',
           ad_personalization: marketing  ? 'granted' : 'denied'
         });
+        // Załaduj GA4 dynamicznie gdy analytics zostało odblokowane
+        if (statistics && typeof window.loadGA === 'function') {
+          window.loadGA();
+        }
         // Usuń ciasteczka GA/Ads gdy odrzucono
         if (!statistics || !marketing) {
           document.cookie.split(';').forEach(function (c) {

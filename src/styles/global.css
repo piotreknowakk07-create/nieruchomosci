@@ -67,6 +67,23 @@ nav a:hover { color: #A67A44; }
   100% { box-shadow: 0 0 0 0 rgba(166,122,68,0); }
 }
 
+.cta-inline-mobile {
+  display: block;
+  text-align: center;
+  background: linear-gradient(135deg, #A67A44, #B8914F);
+  color: #fff;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+  padding: 14px 28px;
+  border-radius: 12px;
+  text-decoration: none;
+  animation: cta-pulse 2s ease-in-out infinite;
+}
+.cta-inline-mobile:hover { opacity: 0.92; }
+.cta-inline-mobile:active { opacity: 0.85; transform: scale(0.98); }
+
 #mobile-menu { position: fixed; top: 64px; left: 0; right: 0; z-index: 49; background: rgba(26, 43, 47, 0.82); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.07); overflow: hidden; max-height: 0; transition: max-height 0.4s ease, opacity 0.3s ease; opacity: 0; pointer-events: none; }
 #mobile-menu.open { max-height: 440px; opacity: 1; pointer-events: auto; }
 #mobile-menu a { display: block; color: rgba(255,255,255,0.72); font-size: 1rem; font-weight: 500; padding: 14px 24px; border-bottom: 1px solid rgba(255,255,255,0.06); transition: color 0.2s, background 0.2s; }

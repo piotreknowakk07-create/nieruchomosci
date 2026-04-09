@@ -1457,22 +1457,23 @@
       display: flex;
       align-items: center;
       border-radius: 100px;
-      background: #1D3033;
+      background: #ffffff;
       overflow: visible;
-      box-shadow: 0 12px 40px rgba(29,48,51,0.45);
+      box-shadow: 0 12px 40px rgba(255,255,255,0.25);
       cursor: pointer;
       user-select: none;
       transition: background 0.4s cubic-bezier(0.22,1,0.36,1),
                   box-shadow 0.4s ease,
                   filter 0.25s;
     }
-    #lw-pill:hover { filter: brightness(1.08); }
+    #lw-pill:hover { filter: brightness(0.95); }
 
-    /* Nad ciemnym tłem → biały */
-    #lw-pill.on-dark {
-      background: #ffffff;
-      box-shadow: 0 12px 40px rgba(255,255,255,0.2);
+    /* Poza ciemnym tłem → ciemny zielony */
+    #lw-pill.off-dark {
+      background: #1D3033;
+      box-shadow: 0 12px 40px rgba(29,48,51,0.45);
     }
+    #lw-pill.off-dark:hover { filter: brightness(1.08); }
 
     #lw-icon {
       width: 62px; height: 62px; min-width: 62px;
@@ -1481,12 +1482,12 @@
     }
     #lw-icon svg {
       width: 24px; height: 24px;
-      fill: rgba(255,255,255,0.92);
+      fill: #1D3033;
       animation: lw-ring 3.5s ease-in-out infinite;
       transform-origin: center;
       transition: fill 0.4s cubic-bezier(0.22,1,0.36,1);
     }
-    #lw-pill.on-dark #lw-icon svg { fill: #1D3033; }
+    #lw-pill.off-dark #lw-icon svg { fill: rgba(255,255,255,0.92); }
 
     #lw-text {
       max-width: 0; overflow: hidden; white-space: nowrap;
@@ -1502,34 +1503,34 @@
 
     #lw-text .lw-label {
       font-size: 0.58rem; letter-spacing: 0.13em; text-transform: uppercase;
-      color: rgba(255,255,255,0.55); font-family: 'Erode', Georgia, serif;
+      color: rgba(29,48,51,0.55); font-family: 'Erode', Georgia, serif;
       font-weight: 500; display: block;
       transition: color 0.4s ease;
     }
-    #lw-pill.on-dark #lw-text .lw-label { color: rgba(29,48,51,0.55); }
+    #lw-pill.off-dark #lw-text .lw-label { color: rgba(255,255,255,0.55); }
 
     #lw-text .lw-cta {
-      font-size: 1.05rem; font-weight: 700; color: #ffffff;
+      font-size: 1.05rem; font-weight: 700; color: #1D3033;
       font-family: 'Erode', Georgia, serif;
       letter-spacing: 0.01em; line-height: 1.15; display: block;
       transition: color 0.4s ease;
     }
-    #lw-pill.on-dark #lw-text .lw-cta { color: #1D3033; }
+    #lw-pill.off-dark #lw-text .lw-cta { color: #ffffff; }
 
     #lw-text .lw-num {
-      font-size: 0.68rem; color: rgba(255,255,255,0.4);
+      font-size: 0.68rem; color: rgba(29,48,51,0.45);
       letter-spacing: 0.1em; font-family: sans-serif; display: block;
       transition: color 0.4s ease;
     }
-    #lw-pill.on-dark #lw-text .lw-num { color: rgba(29,48,51,0.45); }
+    #lw-pill.off-dark #lw-text .lw-num { color: rgba(255,255,255,0.4); }
 
     .lw-ring {
       position: absolute; inset: -5px; border-radius: 100px;
-      border: 1.5px solid #1D3033;
+      border: 1.5px solid #ffffff;
       pointer-events: none; animation: lw-pulse 2.6s ease-out infinite;
       transition: border-color 0.4s ease;
     }
-    #lw-pill.on-dark .lw-ring { border-color: #ffffff; }
+    #lw-pill.off-dark .lw-ring { border-color: #1D3033; }
   </style>
 
   <div id="lw-widget">
@@ -1564,16 +1565,19 @@
 
       // Detekcja ciemnego tła pod widgetem
       function checkTheme() {
-        const r = widget.getBoundingClientRect();
-        const cx = r.left + r.width / 2;
-        const cy = r.top + r.height / 2;
+        // Używamy stałej pozycji fixed (bottom-right) niezależnie od animacji
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+        const cx = vw - 28 - 31; // right: 28px + half of ~62px icon
+        const cy = vh - 28 - 31; // bottom: 28px + half of ~62px icon
         widget.style.visibility = 'hidden';
         const el = document.elementFromPoint(cx, cy);
         widget.style.visibility = '';
         const isDark = !!(el && el.closest('[data-theme="dark"]'));
-        pill.classList.toggle('on-dark', isDark);
+        pill.classList.toggle('off-dark', !isDark);
       }
-      checkTheme();
+      // Wywołaj po zakończeniu animacji wejścia (delay 1s + duration 0.6s)
+      setTimeout(checkTheme, 1700);
       window.addEventListener('scroll', checkTheme, { passive: true });
 
       // Cykl 1: otwiera się po 5s, zamyka po 60s

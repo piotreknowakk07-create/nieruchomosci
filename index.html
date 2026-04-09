@@ -1564,10 +1564,17 @@
       function close() { text.classList.remove('open'); }
 
       // Detekcja: biały gdy hero widoczny, ciemny gdy poza hero
-      const hero = document.querySelector('[data-theme="dark"]');
+      const hero = document.querySelector('section[data-theme="dark"]');
       function setTheme(heroVisible) {
         pill.classList.toggle('off-dark', !heroVisible);
       }
+      function isHeroVisible() {
+        if (!hero) return false;
+        const r = hero.getBoundingClientRect();
+        return r.bottom > 0 && r.top < window.innerHeight;
+      }
+      // Stan początkowy — synchronicznie, zanim observer odpali
+      setTheme(isHeroVisible());
       if (hero) {
         const observer = new IntersectionObserver(
           (entries) => setTheme(entries[0].isIntersecting),

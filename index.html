@@ -1565,23 +1565,13 @@
 
       // Detekcja: biały gdy hero widoczny, ciemny gdy poza hero
       const hero = document.querySelector('section[data-theme="dark"]');
-      function setTheme(heroVisible) {
-        pill.classList.toggle('off-dark', !heroVisible);
-      }
-      function isHeroVisible() {
-        if (!hero) return false;
+      function updateTheme() {
+        if (!hero) { pill.classList.add('off-dark'); return; }
         const r = hero.getBoundingClientRect();
-        return r.bottom > 0 && r.top < window.innerHeight;
+        pill.classList.toggle('off-dark', r.bottom <= 0);
       }
-      // Stan początkowy — synchronicznie, zanim observer odpali
-      setTheme(isHeroVisible());
-      if (hero) {
-        const observer = new IntersectionObserver(
-          (entries) => setTheme(entries[0].isIntersecting),
-          { threshold: 0 }
-        );
-        observer.observe(hero);
-      }
+      updateTheme();
+      window.addEventListener('scroll', updateTheme, { passive: true });
 
       // Cykl 1: otwiera się po 5s, zamyka po 60s
       // Cykl 2: otwiera się 20s po zamknięciu, zamyka po 60s
